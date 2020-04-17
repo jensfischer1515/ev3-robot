@@ -21,6 +21,12 @@ repositories {
 dependencies {
     implementation("org.slf4j:slf4j-simple:1.7.25")
     implementation("com.github.ev3dev-lang-java:ev3dev-lang-java:2.5.3")
+    implementation group: 'org.glassfish.tyrus', name: 'tyrus-client', version: '1.16'
+    implementation group: 'org.glassfish.tyrus', name: 'tyrus-container-grizzly-client', version: '1.16'
+    implementation group: 'org.json', name: 'json', version: '20190722'
+
+    annotationProcessor("org.projectlombok:lombok:1.18.8")
+    compileOnly("org.projectlombok:lombok:1.18.8")
 }
 
 apply from: './config.gradle'

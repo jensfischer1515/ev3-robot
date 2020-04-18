@@ -1,6 +1,6 @@
-package example.websocket;
+package example.websocket.robot;
 
-import example.websocket.handlers.Ev3ActionHandler;
+import example.websocket.handlers.ActionHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,12 +9,12 @@ import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
-public class Ev3MessageHandler implements MessageHandler.Whole<Ev3Message> {
+public class RobotMessageHandler implements MessageHandler.Whole<RobotMessage> {
 
-    private final Map<String, Ev3ActionHandler> actionHandlers;
+    private final Map<String, ActionHandler> actionHandlers;
 
     @Override
-    public void onMessage(Ev3Message message) {
+    public void onMessage(RobotMessage message) {
         LOGGER.info("Received message: {}", message);
 
         message.getAction()

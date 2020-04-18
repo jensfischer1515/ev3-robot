@@ -1,4 +1,4 @@
-package example.websocket;
+package example.websocket.robot;
 
 import lombok.Data;
 import org.json.JSONObject;
@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import java.util.Optional;
 
 @Data
-public class Ev3Message {
+public class RobotMessage {
     private final String event;
     private final JSONObject payload;
 

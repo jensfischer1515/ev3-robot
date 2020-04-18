@@ -1,4 +1,4 @@
-package example.websocket;
+package example.websocket.open;
 
 import lombok.Builder;
 import lombok.Data;

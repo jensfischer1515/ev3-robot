@@ -1,6 +1,9 @@
 package example.websocket;
 
 import example.websocket.handlers.MotorHandler;
+import example.websocket.open.OpenMessageDecoder;
+import example.websocket.robot.RobotMessageDecoder;
+import example.websocket.time.TimeMessageDecoder;
 import lejos.hardware.port.MotorPort;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -20,7 +23,7 @@ import static javax.websocket.ContainerProvider.getWebSocketContainer;
 
 @Slf4j
 @RequiredArgsConstructor
-public class Ev3Client {
+public class WebSocketClient {
 
     private final String endpointUri;
 
@@ -32,8 +35,8 @@ public class Ev3Client {
         return container.connectToServer(endpoint(), endpointConfig(), URI.create(endpointUri));
     }
 
-    private Ev3ApiBridgeEndpoint endpoint() {
-        return Ev3ApiBridgeEndpoint.builder()
+    private ApiBridgeEndpoint endpoint() {
+        return ApiBridgeEndpoint.builder()
                 .actionHandler("motorA", new MotorHandler(MotorPort.A))
                 .actionHandler("motorB", new MotorHandler(MotorPort.B))
                 .actionHandler("motorC", new MotorHandler(MotorPort.C))
@@ -52,7 +55,7 @@ public class Ev3Client {
                 .decoders(Arrays.asList(
                         OpenMessageDecoder.class,
                         TimeMessageDecoder.class,
-                        Ev3MessageDecoder.class
+                        RobotMessageDecoder.class
                 ))
                 .build();
     }

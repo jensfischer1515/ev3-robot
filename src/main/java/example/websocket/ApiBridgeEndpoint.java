@@ -1,6 +1,8 @@
 package example.websocket;
 
-import example.websocket.handlers.Ev3ActionHandler;
+import example.websocket.handlers.ActionHandler;
+import example.websocket.robot.RobotMessage;
+import example.websocket.robot.RobotMessageHandler;
 import lombok.Builder;
 import lombok.Singular;
 import lombok.SneakyThrows;
@@ -12,10 +14,10 @@ import java.util.Map;
 
 @Slf4j
 @Builder
-public class Ev3ApiBridgeEndpoint extends Endpoint {
+public class ApiBridgeEndpoint extends Endpoint {
 
     @Singular
-    private final Map<String, Ev3ActionHandler> actionHandlers;
+    private final Map<String, ActionHandler> actionHandlers;
 
     @Override
     @SneakyThrows
@@ -23,7 +25,7 @@ public class Ev3ApiBridgeEndpoint extends Endpoint {
         LOGGER.info("Opening session with id {}", session.getId());
         session.setMaxIdleTimeout(-1);
 
-        session.addMessageHandler(Ev3Message.class, new Ev3MessageHandler(actionHandlers));
+        session.addMessageHandler(RobotMessage.class, new RobotMessageHandler(actionHandlers));
         //session.addMessageHandler(OpenMessage.class, new OpenMessageHandler());
         //session.addMessageHandler(String.class, new TimeMessageHandler());
         //session.addMessageHandler(String.class, message -> LOGGER.info("STRING: {}", message));

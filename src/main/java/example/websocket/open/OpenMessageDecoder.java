@@ -1,4 +1,4 @@
-package example.websocket;
+package example.websocket.open;
 
 import org.glassfish.tyrus.core.coder.CoderAdapter;
 import org.json.JSONObject;

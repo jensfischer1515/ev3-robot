@@ -1,4 +1,4 @@
-package example.websocket;
+package example.websocket.time;
 
 import lombok.extern.slf4j.Slf4j;
 

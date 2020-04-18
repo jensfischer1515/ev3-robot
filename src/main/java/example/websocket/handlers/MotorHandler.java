@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
-public class MotorHandler implements Ev3ActionHandler{
+public class MotorHandler implements ActionHandler {
 
     private final Port port;
 

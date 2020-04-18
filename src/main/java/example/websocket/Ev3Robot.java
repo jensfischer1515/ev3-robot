@@ -4,7 +4,6 @@ import lombok.SneakyThrows;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import javax.websocket.Session;
-
 import java.io.InputStream;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -20,10 +19,14 @@ public class Ev3Robot {
             SLF4JBridgeHandler.install();
         }
 
-        Session session = new WebSocketClient("wss://ev3-api-bridge.herokuapp.com/socket.io/?EIO=3&transport=websocket").connect();
+        //Session session = new WebSocketClient("wss://ev3-api-bridge.herokuapp.com/socket.io/?EIO=3&transport=websocket").connect();
         //Session session = new WebSocketClient("ws://ev3-api-bridge.localtest.me:3000/socket.io/?EIO=3&transport=websocket").connect();
+        Session session = new WebSocketClient("ws://192.168.2.39:3000/socket.io/?EIO=3&transport=websocket").connect();
 
-        SECONDS.sleep(100);
-        System.exit(0);
+
+        while (true) {
+            SECONDS.sleep(10);
+        }
+        //System.exit(0);
     }
 }

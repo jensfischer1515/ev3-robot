@@ -32,6 +32,7 @@ public class WebSocketClient {
         LOGGER.info("Connecting to {}", endpointUri);
         WebSocketContainer container = getWebSocketContainer();
         container.setDefaultMaxSessionIdleTimeout(-1);
+        container.setAsyncSendTimeout(-1);
         return container.connectToServer(endpoint(), endpointConfig(), URI.create(endpointUri));
     }
 

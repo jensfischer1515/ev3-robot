@@ -6,18 +6,17 @@ import org.json.JSONObject;
 
 import javax.websocket.Decoder;
 
-public class Ev3MessageDecoder extends CoderAdapter implements Decoder.Text<Ev3Message> {
+public class TimeMessageDecoder extends CoderAdapter implements Decoder.Text<String> {
 
     @Override
     public boolean willDecode(String rawMessage) {
-        return rawMessage.startsWith("42[\"ev3\",");
+        return rawMessage.startsWith("42[\"time\",");
     }
 
     @Override
-    public Ev3Message decode(String rawMessage) {
+    public String decode(String rawMessage) {
         JSONArray jsonArray = new JSONArray(rawMessage.substring(2));
-        String event = jsonArray.optString(0);
         JSONObject payload = jsonArray.optJSONObject(1);
-        return new Ev3Message(event, payload);
+        return payload.toString();
     }
 }

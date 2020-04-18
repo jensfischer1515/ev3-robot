@@ -23,22 +23,23 @@ public class Ev3ApiBridgeEndpoint extends Endpoint {
         LOGGER.info("Opening session with id {}", session.getId());
         session.setMaxIdleTimeout(-1);
 
-        session.addMessageHandler(PongMessage.class, message -> LOGGER.warn("Pong: {}", new String(message.getApplicationData().array())));
-        //session.addMessageHandler(Ev3Message.class, new Ev3MessageHandler(actionHandlers));
-        session.addMessageHandler(String.class, message -> LOGGER.warn("STRING {}", message));
-        session.getBasicRemote().sendPing(ByteBuffer.wrap("PING".getBytes()));
-        session.getBasicRemote().sendPong(ByteBuffer.wrap("PONG".getBytes()));
+        session.addMessageHandler(Ev3Message.class, new Ev3MessageHandler(actionHandlers));
+        //session.addMessageHandler(OpenMessage.class, new OpenMessageHandler());
+        //session.addMessageHandler(String.class, new TimeMessageHandler());
+        //session.addMessageHandler(String.class, message -> LOGGER.info("STRING: {}", message));
+        session.addMessageHandler(ByteBuffer.class, message -> LOGGER.info("BINARY: {}", new String(message.array())));
+        session.addMessageHandler(PongMessage.class, message -> LOGGER.warn("PONG: {}", new String(message.getApplicationData().array())));
     }
 
     @Override
     public void onClose(Session session, CloseReason closeReason) {
-        LOGGER.info("Closing: {}", closeReason);
+        LOGGER.warn("CLOSE: {}", closeReason);
         super.onClose(session, closeReason);
     }
 
     @Override
-    public void onError(Session session, Throwable thr) {
-        LOGGER.error("Error", thr);
-        super.onError(session, thr);
+    public void onError(Session session, Throwable e) {
+        LOGGER.error("ERROR", e);
+        super.onError(session, e);
     }
 }

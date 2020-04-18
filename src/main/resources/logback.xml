@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-
-    <jmxConfigurator />
-
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <target>System.out</target>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
                 %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
@@ -15,9 +11,12 @@
     <logger name="ch.qos.logback.core" level="OFF" />
     <logger name="ev3dev.hardware" level="TRACE" />
     <logger name="ev3dev.utils" level="TRACE" />
+    <logger name="jdk" level="INFO"/>
+    <logger name="org.glassfish.tyrus" level="INFO"/>
+    <logger name="org.glassfish.grizzly" level="INFO"/>
+    <logger name="org.glassfish.tyrus.core.TyrusEndpointWrapper" level="DEBUG" />
 
     <root level="TRACE">
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="CONSOLE"/>
     </root>
-
 </configuration>
